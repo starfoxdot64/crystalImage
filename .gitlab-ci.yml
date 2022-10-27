@@ -1,0 +1,47 @@
+image: "registry.getcryst.al/crystal/misc/docker:latest"
+
+iso:
+  before_script: |
+    # Ensure container is up to date and has necessary packages
+    pacman -Syu --needed --noconfirm
+    pacman -S git pacman-contrib archiso bind --needed --noconfirm
+    
+    # Ensure repo.getcryst.al is up
+    nslookup repo.getcryst.al
+  script: |
+    # Set ${BUILD_DATE}
+    # ISO-8601 Format
+    export BUILD_DATE=$(date +'%Y-%m-%d')
+    
+    # Clone ISO repo and enter it
+    git clone https://git.getcryst.al/crystal/misc/iso
+    cd iso
+  
+    # Build ISO and rename to match BUILD_DATE
+    bash build.sh --build-iso
+    if [[ ! "$(ls *.iso)" == "crystal-live-${BUILD_DATE}-x86_64.iso" ]]; then
+      mv *.iso crystal-live-${BUILD_DATE}-x86_64.iso
+    fi
+    
+    md5sum *.iso > MD5SUM-iso
+  
+    # Remove chrooted.sh between operations
+    rm chrooted.sh
+  
+    # Likewise, but for the rootfs
+    bash build.sh --build-bootstrap
+    mv *.tar.gz crystal-rootfs-${BUILD_DATE}-x86_64.tar.gz
+  
+    md5sum *.tar.gz > MD5SUM-rootfs
+  
+    # Remove chrooted.sh one final time
+    rm chrooted.sh
+
+    mkdir /output/${BUILD_DATE}
+
+    # UL to host
+    cp *.iso /output/${BUILD_DATE}/.
+    cp *.tar.gz /output/${BUILD_DATE}/.
+    cp MD5SUM* /output/${BUILD_DATE}/.
+
+
