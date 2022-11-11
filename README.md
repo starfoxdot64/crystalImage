@@ -13,6 +13,7 @@
 * `pacman-contrib`
 * `archiso`
 * `squashfs-tools`
+* [`crystal-mirrorlist`](https://git.getcryst.al/crystal/pkgbuilds/crystal-mirrorlist)
 
 ## How to Build:
 You will have to use Arch or Arch-Based distros to build this ISO File.
