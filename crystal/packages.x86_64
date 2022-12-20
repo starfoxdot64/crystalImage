@@ -10,6 +10,7 @@ cowsay
 curl
 dosfstools
 edk2-shell
+efibootmgr
 gtkmm3
 f2fs-tools
 linux
