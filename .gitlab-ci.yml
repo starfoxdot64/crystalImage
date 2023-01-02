@@ -37,11 +37,10 @@ iso:
     # Remove chrooted.sh one final time
     rm chrooted.sh
 
-    mkdir /output/${BUILD_DATE}
-
-    # UL to host
-    cp *.iso /output/${BUILD_DATE}/.
-    cp *.tar.gz /output/${BUILD_DATE}/.
-    cp MD5SUM* /output/${BUILD_DATE}/.
+  artifacts:
+    paths:
+      - iso/*.iso
+      - iso/*.tar.gz
+      - iso/MD5SUM*
 
 
