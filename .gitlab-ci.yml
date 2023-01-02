@@ -1,6 +1,11 @@
 image: "registry.getcryst.al/crystal/misc/docker:latest"
 
 iso:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never
+
   before_script: |
     # Ensure container is up to date and has necessary packages
     pacman -Syu --needed --noconfirm
@@ -8,6 +13,7 @@ iso:
     
     # Ensure repo.getcryst.al is up
     nslookup repo.getcryst.al
+
   script: |
     # Set ${BUILD_DATE}
     # ISO-8601 Format
