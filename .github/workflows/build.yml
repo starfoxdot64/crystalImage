@@ -26,15 +26,15 @@ jobs:
           # ISO-8601 Format
             export BUILD_DATE=$(date +'%Y-%m-%d')
 
-          # Clone ISO repo and enter it
+          # Clone ISO repo
             git clone https://git.getcryst.al/crystal/misc/iso
-            cd iso
             
       - name: Build
         id: build
         run: |
-          # Build ISO and rename to match BUILD_DATE
-            bash build.sh --build-iso
+          # Jump into ISO repo, build ISO and rename to match BUILD_DATE
+            cd iso
+            bash ./build.sh --build-iso
             if [[ ! "$(ls *.iso)" == "crystal-live-${BUILD_DATE}-x86_64.iso" ]]; then
               mv *.iso crystal-live-${BUILD_DATE}-x86_64.iso
             fi
