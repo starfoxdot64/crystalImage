@@ -28,7 +28,6 @@ jobs:
                   
          # Install necessary packages
          pacman -Sy archlinux-keyring
-         pacman-key --refresh-keys
          pacman -Sy git archiso pacman-contrib --needed --noconfirm
          
          # Clone ISO repo and enter it
