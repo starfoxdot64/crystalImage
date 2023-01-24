@@ -51,11 +51,12 @@ jobs:
           # Remove chrooted.sh one final time
             rm chrooted.sh
 
-      - name: Upload 
-        uses: ncipollo/release-action@v1
+      - name: Upload and Create Release
+        id: fullsend
+        uses: actions/create-release@latest
         with:
-           artifacts: "iso/*.iso,iso/MD5SUM*,iso/*.tar.gz"
-           token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ env.BUILD_DATE }}
+          release_name: ${{ env.BUILD_DATE }}
 
     
            
