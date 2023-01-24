@@ -44,7 +44,7 @@ jobs:
             rm chrooted.sh
 
           # Likewise, but for the rootfs
-            bash build.sh --build-bootstrap
+            bash ./build.sh --build-bootstrap
             mv *.tar.gz crystal-rootfs-${BUILD_DATE}-x86_64.tar.gz
             md5sum *.tar.gz > MD5SUM-rootfs
 
