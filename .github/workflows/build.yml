@@ -25,14 +25,10 @@ jobs:
          
          # Make sure repo.getcryst.al is up
          nslookup repo.getcryst.al
-         
-         # Attempt to fix corrupt openssl package error from third party docker container
-         pacman -S archlinux-keyring
-         pacman-key --init
-         pacman-key populate archlinux
-         pacman-key --refresh.
-         
+                  
          # Install necessary packages
+         pacman -Sy archlinux-keyring
+         pacman-key --refresh-keys
          pacman -Sy git archiso pacman-contrib --needed --noconfirm
          
          # Clone ISO repo and enter it
