@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Prepare
-        id: fieldprep
+        id: fieldPrep
         run: |
           # Ensure container is up to date and has necessary packages
             pacman -Syu --needed --noconfirm
@@ -51,6 +51,10 @@ jobs:
           # Remove chrooted.sh one final time
             rm chrooted.sh
 
+      - name: Get tag name from date
+        id: makeTag
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -58,4 +62,5 @@ jobs:
             iso/*.iso
             iso/*.tar.gz
             iso/MD5SUM*
-          # generate_release_notes: true
+          generate_release_notes: true
+          tag_name: ${{ steps.tag_name.outputs.date }}
