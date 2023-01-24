@@ -25,7 +25,7 @@ jobs:
           # Set ${BUILD_DATE} and push it to GitHub as an env variable
           # ISO-8601 Format
             export BUILD_DATE=$(date +'%Y-%m-%d')
-            echo $BUILD_DATE >> $GITHUB_ENV
+            echo export BUILD_DATE=$(date +'%Y-%m-%d') >> $GITHUB_ENV
 
           # Clone ISO repo
             git clone https://git.getcryst.al/crystal/misc/iso
