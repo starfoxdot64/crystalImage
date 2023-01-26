@@ -55,10 +55,13 @@ jobs:
           # Remove chrooted.sh one final time
             rm chrooted.sh
 
-      - name: Release
-        uses: ncipollo/release-action@v1.8.6
-        with:
-          artifacts: "iso/*.iso,iso/*.tar.gz,iso/MD5SUM*"
-          commit: main
-          tag: ${{ steps.fieldPrep.outputs.output1 }}
-          token: ${{ secrets.SECRET_TOKEN }}
+#
+#  alright, to hell with the release part since I can't get it working, just check the artifacts
+#
+#      - name: Release
+#        uses: ncipollo/release-action@v1.8.6
+#        with:
+#          artifacts: "iso/*.iso,iso/*.tar.gz,iso/MD5SUM*"
+#          commit: main
+#          tag: ${{ steps.fieldPrep.outputs.output1 }}
+#          token: ${{ secrets.SECRET_TOKEN }}
