@@ -65,3 +65,14 @@ jobs:
 #          commit: main
 #          tag: ${{ steps.fieldPrep.outputs.output1 }}
 #          token: ${{ secrets.SECRET_TOKEN }}
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          # Artifact name
+          name: Crystal Dist
+          # A file, directory or wildcard pattern that describes what to upload
+          path: |
+            iso/*.iso
+            iso/*.tar.gz
+            iso/MD5SUM*
